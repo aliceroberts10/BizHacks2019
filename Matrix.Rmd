@@ -26,6 +26,12 @@ team <- t(team)
 set.seed(123)
 team[lower.tri(team)] <- round(rnorm(10, mean = 0, sd = 1), 0)
 team
+
+#write csv file
+team <- as.data.frame(team)
+team$ID <- teamData$X
+write.csv(team, "teamMatrix.csv", row.names = FALSE)
+a2 <- read.csv("teamMatrix.csv")
 ```
 
 ```{r}
@@ -40,5 +46,10 @@ random <- t(random)
 set.seed(123)
 random[lower.tri(random)] <- round(rnorm(450, mean = 0, sd = 1), 0)
 head(random)
+
+#write csv file
+random <- as.data.frame(random)
+random$ID <- randomData$X
+write.csv(random, "randomMatrix.csv", row.names = FALSE)
 ```
 

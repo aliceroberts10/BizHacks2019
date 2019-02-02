@@ -11,7 +11,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 ```{r Team Data (5)}
-
+set.seed(123)
 #Creating the dataset for our Team for display 
 
 FirstName <- c("Alice", "Kristen", "Zhi Yuh", "Charlene", "Nicholas" )
@@ -127,6 +127,71 @@ RandomData <- data.frame(FirstName,LastName,EmployeeNumber, Department,Job,Offic
 head(RandomData)
 # Write CSV in R
 write.csv(RandomData, file = "RandomData.csv")
+
+```
+
+
+
+```{r Creating Function}
+#Getting rid of not important stuff 
+RandomData[,c("PerformanceScore","YearsofExperience")] <- NULL
+head(RandomData)
+
+## hardcoding number of skills we have 
+maxnumskills <- 7
+
+## Creating a function that matches people based on if they both require each other. 
+## Person is a single row with all variables for one single person
+#Returns a list where the first item is the number of skilled desired and the rest are the row of the matches associated 
+
+MatchFunction <- function(Person,RandomData)
+{
+  OptMatches<- NA
+## Seeing if this person has a skill that they want
+    if (any(Person ==2))
+    {
+      ## finding the col number(s) of the skills wanted
+      colnum<- which(Person == 2)
+
+      ## number of skills wanted 
+      numskillsdesired<-length(colnum)
+      
+      ##finding the row numbers of people that have the skill
+      MATCH <-rep( list(list()), numskillsdesired ) 
+      
+          for (i in 1:(numskillsdesired))
+          {
+            MATCH[[i]]<-which((RandomData[,colnum[i]]==1))
+        
+          }
+  
+      
+      RandomData$count <- rep(0, length(RandomData$EmployeeNumber)) 
+      
+          for (i in 1:(numskillsdesired))
+          {
+              RandomData$count = RandomData$count + ifelse(as.numeric(rownames(RandomData)) %in%  MATCH[[i]],1,0)
+          }
+  
+  
+      OptMatches<-RandomData[with(RandomData,order(-count)), ]
+  
+  
+  
+      }
+  
+  return(OptMatches) 
+
+}
+
+#returns the dataframe in the desired order 
+```
+
+
+```{r Implementing Function}
+head(RandomData)
+Person <- RandomData[2,]
+Result1<-MatchFunction(Person,RandomData)
 
 ```
 

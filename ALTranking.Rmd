@@ -34,9 +34,10 @@ testdist <- dist(teamData[,2:12], diag = TRUE, upper = TRUE, method = "euclidean
 ```
 
 ```{r}
-ALTSearch <- function(x){
+ALTSearch <- function(ID_Num, Dframe){
   #read file: team
   teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
+  teamFull <- teamData
   teamData <- teamData[, c(1, 8:18)]
 
   #scale the numeric variables as the salary has significantly huge value than other variables
@@ -50,9 +51,12 @@ ALTSearch <- function(x){
   rankingTeam <- as.data.frame(matrix(5*5, nrow = 5, ncol = 5))
 
   rankingTeam[x] <- order(testdistdf[x])
-  return(rankingTeam[x][2:5,])
+  #data.frame(rankingTeam[x][2:5,])
+  ID <- rankingTeam[x][2:5,]
+  #teamData[c(ID), ]
+  return(teamFull[c(ID), ])
 }
 
-ALTSearch(2)
+ALTSearch(c(1,2), teamData)
 ```
 

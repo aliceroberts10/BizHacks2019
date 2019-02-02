@@ -1,0 +1,58 @@
+---
+title: "Hclust"
+author: "Zhi Yuh Ou Yang (301322064)"
+date: "2/2/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#read file: team
+teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
+teamData <- teamData[, c(1, 8:18)]
+
+#scale the numeric variables as the salary has significantly huge value than other variables
+teamData[, 2:12] <- scale(teamData[, 2:12])
+```
+
+```{r}
+testdist <- dist(teamData[,2:12], diag = TRUE, upper = TRUE, method = "euclidean")
+
+  testdistmatrix <- as.matrix(testdist)
+  testdistdf <- as.data.frame(testdistmatrix)
+  testdistdf$ID <- teamData$X
+  rankingTeam <- as.data.frame(matrix(5*5, nrow = 5, ncol = 5))
+
+  
+  for (i in 1: nrow(testdistdf)){
+  rankingTeam[i,] <- order(testdistdf[i])
+  #colnames(rankingTeam[i]) <- paste0("ID",i)
+}
+```
+
+```{r}
+ALTSearch <- function(x){
+  #read file: team
+  teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
+  teamData <- teamData[, c(1, 8:18)]
+
+  #scale the numeric variables as the salary has significantly huge value than other variables
+  teamData[, 2:12] <- scale(teamData[, 2:12])
+
+  testdist <- dist(teamData[,2:12], diag = TRUE, upper = TRUE, method = "euclidean")
+
+  testdistmatrix <- as.matrix(testdist)
+  testdistdf <- as.data.frame(testdistmatrix)
+  testdistdf$ID <- teamData$X
+  rankingTeam <- as.data.frame(matrix(5*5, nrow = 5, ncol = 5))
+
+  rankingTeam[x] <- order(testdistdf[x])
+  return(rankingTeam[x][2:5,])
+}
+
+ALTSearch(2)
+```
+

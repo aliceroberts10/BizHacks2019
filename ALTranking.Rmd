@@ -34,6 +34,7 @@ testdist <- dist(teamData[,2:12], diag = TRUE, upper = TRUE, method = "euclidean
 ```
 
 ```{r}
+#function
 ALTSearch <- function(ID_Num, Dframe){
   #read file: team
   teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
@@ -48,10 +49,10 @@ ALTSearch <- function(ID_Num, Dframe){
   testdistmatrix <- as.matrix(testdist)
   testdistdf <- as.data.frame(testdistmatrix)
   testdistdf$ID <- teamData$X
-  rankingTeam <- as.data.frame(matrix(5*5, nrow = 5, ncol = 5))
+  rankingTeam <- as.data.frame(matrix(nrow(teamData)*nrow(teamData), nrow = nrow(teamData), ncol = nrow(teamData)))
 
   rankingTeam[ID_Num] <- order(testdistdf[ID_Num])
-  ID <- rankingTeam[ID_Num][2:5,]
+  ID <- rankingTeam[ID_Num][2:nrow(teamData),]
   return(teamFull[c(ID), ])
 }
 

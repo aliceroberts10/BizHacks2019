@@ -39,23 +39,25 @@ ALTSearch <- function(ID_Num, Dframe){
   #read file: team
   teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
   teamFull <- teamData
-  teamData <- teamData[, c(1, 8:18)]
+  Evariable <- c("YearsofExperience", "Age", "PerformanceScore", "Salary" ,"agile.methodology", "public.speaking",   "python", "R", "Excel", "Cplusplus", "Java")
+  teamData <- teamData[, c("EmployeeNumber", Evariable)]
 
   #scale the numeric variables as the salary has significantly huge value than other variables
-  teamData[, 2:12] <- scale(teamData[, 2:12])
+  teamData[, Evariable] <- scale(teamData[, Evariable])
 
-  testdist <- dist(teamData[,2:12], diag = TRUE, upper = TRUE, method = "euclidean")
+  testdist <- dist(teamData[,Evariable], diag = TRUE, upper = TRUE, method = "euclidean")
 
   testdistmatrix <- as.matrix(testdist)
   testdistdf <- as.data.frame(testdistmatrix)
-  testdistdf$ID <- teamData$X
-  rankingTeam <- as.data.frame(matrix(nrow(teamData)*nrow(teamData), nrow = nrow(teamData), ncol = nrow(teamData)))
+  testdistdf$EmployeeNumber <- teamData$EmployeeNumber
+  colnames(testdistdf) <- c(unlist(teamData$EmployeeNumber), "EmployeeNumber")
 
-  rankingTeam[ID_Num] <- order(testdistdf[ID_Num])
-  ID <- rankingTeam[ID_Num][2:nrow(teamData),]
-  return(teamFull[c(ID), ])
+  rankingTeam <- as.data.frame(testdistdf[order(testdistdf[toString(ID_Num)]), c("EmployeeNumber")][2:nrow(teamData)])
+  colnames(rankingTeam) <- "rankID"  
+  
+  return(teamFull[match(rankingTeam$rankID, teamFull$EmployeeNumber),])
 }
 
-ALTSearch(1, teamData)
+ALTSearch(301322064, teamData)
 ```
 

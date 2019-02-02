@@ -51,7 +51,7 @@ write.csv(TeamData, file = "TeamData.csv")
 n=1000
 
 #Retrieving random names from a random CSV file lol 
-Records <- read.csv("~/Desktop/1000 Records.csv");
+Records <- read.csv("1000 Records.csv");
 
 FirstName <- Records$First.Name
 LastName <- Records$Last.Name

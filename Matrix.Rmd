@@ -10,28 +10,35 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ```{r}
+#read team data
+teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
+
 #create matrix
 #matrix with normal distn (std = 1, mean = 0, identical diagonally)
 #diagonal has to be zero as youre not gonna meet yourself
 
 #for demonstration (five of us)
+
 set.seed(123)
-live <- matrix(rep(0, 5*5), nrow = 5)
-live[lower.tri(live)] <- round(rnorm(10, mean = 0, sd = 1), 0)
-live <- t(live)
+team <- matrix(rep(0, 5*5), nrow = 5, dimnames = list(teamData$X, teamData$X))
+team[lower.tri(team)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+team <- t(team)
 set.seed(123)
-live[lower.tri(live)] <- round(rnorm(10, mean = 0, sd = 1), 0)
-live
+team[lower.tri(team)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+team
 ```
 
 ```{r}
+#read random data
+randomData <- read.csv("randomData.csv", stringsAsFactors = FALSE)
+
 #simulation
 set.seed(123)
-simGo <- matrix(rep(0,1000*1000), nrow = 1000)
-simGo[lower.tri(simGo)] <- round(rnorm(450, mean = 0, sd = 1), 0)
-simGo <- t(simGo)
+random <- matrix(rep(0,1000*1000), nrow = 1000, dimnames = list(randomData$X, randomData$X))
+random[lower.tri(random)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+random <- t(random)
 set.seed(123)
-simGo[lower.tri(simGo)] <- round(rnorm(450, mean = 0, sd = 1), 0)
-simGo
+random[lower.tri(random)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+head(random)
 ```
 

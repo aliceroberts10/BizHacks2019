@@ -1,0 +1,37 @@
+---
+title: "R"
+author: "Zhi Yuh Ou Yang (301322064)"
+date: "2/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#create matrix
+#matrix with normal distn (std = 1, mean = 0, identical diagonally)
+#diagonal has to be zero as youre not gonna meet yourself
+
+#for demonstration (five of us)
+set.seed(123)
+live <- matrix(rep(0, 5*5), nrow = 5)
+live[lower.tri(live)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+live <- t(live)
+set.seed(123)
+live[lower.tri(live)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+live
+```
+
+```{r}
+#simulation
+set.seed(123)
+simGo <- matrix(rep(0,1000*1000), nrow = 1000)
+simGo[lower.tri(simGo)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+simGo <- t(simGo)
+set.seed(123)
+simGo[lower.tri(simGo)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+simGo
+```
+

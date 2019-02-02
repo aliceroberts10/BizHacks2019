@@ -144,7 +144,7 @@ maxnumskills <- 7
 ## Person is a single row with all variables for one single person
 #Returns a list where the first item is the number of skilled desired and the rest are the row of the matches associated 
 
-MatchFunction <- function(Person,RandomData)
+MatchFunction <- function(Person,Data)
 {
   OptMatches<- NA
 ## Seeing if this person has a skill that they want
@@ -161,22 +161,19 @@ MatchFunction <- function(Person,RandomData)
       
           for (i in 1:(numskillsdesired))
           {
-            MATCH[[i]]<-which((RandomData[,colnum[i]]==1))
+            MATCH[[i]]<-which((Data[,colnum[i]]==1))
         
           }
   
-      
-      RandomData$count <- rep(0, length(RandomData$EmployeeNumber)) 
+      Data$count <- rep(0, length(Data$EmployeeNumber)) 
       
           for (i in 1:(numskillsdesired))
           {
-              RandomData$count = RandomData$count + ifelse(as.numeric(rownames(RandomData)) %in%  MATCH[[i]],1,0)
+              Data$count = Data$count + ifelse(as.numeric(rownames(Data)) %in%  MATCH[[i]],1,0)
           }
   
   
-      OptMatches<-RandomData[with(RandomData,order(-count)), ]
-  
-  
+      OptMatches<-Data[with(Data,order(-count)), ]
   
       }
   
@@ -191,8 +188,15 @@ MatchFunction <- function(Person,RandomData)
 ```{r Implementing Function}
 head(RandomData)
 Person <- RandomData[2,]
-Result1<-MatchFunction(Person,RandomData)
-Result1
+Result<-MatchFunction(Person,RandomData)
+Result
+```
+```{r}
+TeamData[,c("PerformanceScore","YearsofExperience")] <- NULL
+head(TeamData)
+Person <- TeamData[6,]
+Result<-MatchFunction(Person,TeamData)
+
 ```
 
 

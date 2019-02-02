@@ -14,28 +14,28 @@ knitr::opts_chunk$set(echo = TRUE)
 set.seed(123)
 #Creating the dataset for our Team for display 
 
-FirstName <- c("Alice", "Kristen", "Zhi Yuh", "Charlene", "Nicholas" )
-LastName <- c("Roberts", "Bystrom", "Ou Yang", "Nicer", "Chin")
-EmployeeNumber <-c(301288793, 301252960, 301322064, 24600165, 54101167)
-Job<- c("Senior Optimization Analyst","Applied Data Scientist", "Financial Analyst", "Software Developer II- IT Integration","Senior Software Developer- eCommerce Web")
-YearsofExperience<- c(15,6,12,3,10)
-OfficeLocation<- c("Vancouver","Vancouver","Vancouver","Vancouver","Vancouver")
-Age<- c(35,28,35,24,30)
-Department <- c("Data + Analytics","Data + Analytics", "Finance + Accounting", "Software Development","Software Development")
+FirstName <- c("Alice", "Kristen", "Zhi Yuh", "Charlene", "Nicholas","New")
+LastName <- c("Roberts", "Bystrom", "Ou Yang", "Nicer", "Chin","User")
+EmployeeNumber <-c(301288793, 301252960, 301322064, 24600165, 54101167,1111111)
+Job<- c("Senior Optimization Analyst","Applied Data Scientist", "Financial Analyst", "Software Developer II- IT Integration","Senior Software Developer- eCommerce Web","Business Analyst")
+YearsofExperience<- c(15,6,12,3,10,1)
+OfficeLocation<- c("Vancouver","Vancouver","Vancouver","Vancouver","Vancouver","Vancouver")
+Age<- c(35,28,35,24,30,21)
+Department <- c("Data + Analytics","Data + Analytics", "Finance + Accounting", "Software Development","Software Development","Data + Analytics")
 
 ##Performance out of 10 
-PerformanceScore <-c(9,10,7,8,10 )
-Salary <- c(150000,120000,100000,90000,110000)
+PerformanceScore <-c(9,10,7,8,10,5)
+Salary <- c(150000,120000,100000,90000,110000,80000)
 
 # Socre between: 0 1 or 2  where 0 means no, 1 means yes, 2 means wants to learn
 
-agile.methodology <- c(1,1,2,1,1)
-public.speaking <- c(1,2,0,0,1)
-python <-c(2,1,0,1,1)
-R <-c(1,1,1,2,0)
-Excel <-c(1,1,1,2,0)
-Cplusplus <-c(2,0,0,1,1)
-Java <- c(0,0,2,1,1)
+agile.methodology <- c(1,1,2,1,1,0)
+public.speaking <- c(1,2,0,0,1,1)
+python <-c(2,1,0,1,1,0)
+R <-c(1,1,1,2,0,2)
+Excel <-c(1,1,1,2,0,2)
+Cplusplus <-c(2,0,0,1,1,0)
+Java <- c(0,0,2,1,1,1)
 
 TeamData <- data.frame(FirstName,LastName,EmployeeNumber, Department,Job,OfficeLocation, YearsofExperience,Age,PerformanceScore,Salary,agile.methodology,public.speaking,python,R,Excel,Cplusplus,Java)
 
@@ -192,7 +192,7 @@ MatchFunction <- function(Person,RandomData)
 head(RandomData)
 Person <- RandomData[2,]
 Result1<-MatchFunction(Person,RandomData)
-
+Result1
 ```
 
 

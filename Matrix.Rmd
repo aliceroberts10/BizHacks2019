@@ -1,0 +1,44 @@
+---
+title: "R"
+author: "Zhi Yuh Ou Yang (301322064)"
+date: "2/1/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+#read team data
+teamData <- read.csv("TeamData.csv", stringsAsFactors = FALSE)
+
+#create matrix
+#matrix with normal distn (std = 1, mean = 0, identical diagonally)
+#diagonal has to be zero as youre not gonna meet yourself
+
+#for demonstration (five of us)
+
+set.seed(123)
+team <- matrix(rep(0, 5*5), nrow = 5, dimnames = list(teamData$X, teamData$X))
+team[lower.tri(team)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+team <- t(team)
+set.seed(123)
+team[lower.tri(team)] <- round(rnorm(10, mean = 0, sd = 1), 0)
+team
+```
+
+```{r}
+#read random data
+randomData <- read.csv("randomData.csv", stringsAsFactors = FALSE)
+
+#simulation
+set.seed(123)
+random <- matrix(rep(0,1000*1000), nrow = 1000, dimnames = list(randomData$X, randomData$X))
+random[lower.tri(random)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+random <- t(random)
+set.seed(123)
+random[lower.tri(random)] <- round(rnorm(450, mean = 0, sd = 1), 0)
+head(random)
+```
+

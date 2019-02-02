@@ -1,6 +1,6 @@
-"","FirstName","LastName","EmployeeNumber","Job","YearsofExperience","OfficeLocation","Age","DateofHire","Department","PerformanceScore","Salary"
-"1","Alice","Roberts",301288793,"Senior Optimization Analyst",15,"Vancouver",35,3.21936771618054e-05,"Data + Analytics",9,150000
-"2","Kristen","Bystrom",301252960,"Applied Data Scientist",6,"Vancouver",28,0.0014903129657228,"Data + Analytics",10,120000
-"3","Zhi Yuh","Ou Yang",301322064,"Financial Analyst",12,"Vancouver",35,0.000199302441454908,"Finance + Accounting",7,1e+05
-"4","Charlene","Nicer",24600165,"Software Developer II- IT Integration",3,"Vancouver",24,0.000248015873015873,"Software Development",8,90000
-"5","Nicholas","Chin",54101167,"Senior Software Developer- eCommerce Web",10,"Vancouver",30,0.000149328023892484,"Software Development",10,110000
+"","FirstName","LastName","EmployeeNumber","Department","Job","OfficeLocation","YearsofExperience","Age","PerformanceScore","Salary","agile.methodology","public.speaking","python","R","Excel","Cplusplus","Java"
+"1","Alice","Roberts",301288793,"Data + Analytics","Senior Optimization Analyst","Vancouver",15,35,9,150000,1,1,2,1,1,2,0
+"2","Kristen","Bystrom",301252960,"Data + Analytics","Applied Data Scientist","Vancouver",6,28,10,120000,1,2,1,1,1,0,0
+"3","Zhi Yuh","Ou Yang",301322064,"Finance + Accounting","Financial Analyst","Vancouver",12,35,7,1e+05,2,0,0,1,1,0,2
+"4","Charlene","Nicer",24600165,"Software Development","Software Developer II- IT Integration","Vancouver",3,24,8,90000,1,0,1,2,2,1,1
+"5","Nicholas","Chin",54101167,"Software Development","Senior Software Developer- eCommerce Web","Vancouver",10,30,10,110000,1,1,1,0,0,1,1

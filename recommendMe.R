@@ -6,12 +6,12 @@ args = commandArgs(trailingOnly=TRUE)
 if (length(args)==0) {
   stop("At least one argument must be supplied (input file).n", call.=FALSE)
 } else if (length(args)==1) {
-  # default output file
-  args[2] = "out.txt"
+  # default output file if no second argument is supplied
+  args[2] = "out.csv"
 }
 
-## program...
-df = read.table(args[1], header=TRUE)
+## Program
+df = read.csv(args[1], header=TRUE)
 num_vars = which(sapply(df, class)=="numeric")
 df_out = df[ ,num_vars]
-write.table(df_out, file=args[2], row.names=FALSE)
+write.csv(df_out, file=args[2], row.names=FALSE)

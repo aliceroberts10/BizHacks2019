@@ -50,11 +50,11 @@ ALTSearch <- function(ID_Num, Dframe){
   testdistdf$ID <- teamData$X
   rankingTeam <- as.data.frame(matrix(5*5, nrow = 5, ncol = 5))
 
-  rankingTeam[x] <- order(testdistdf[x])
-  ID <- rankingTeam[x][2:5,]
+  rankingTeam[ID_Num] <- order(testdistdf[ID_Num])
+  ID <- rankingTeam[ID_Num][2:5,]
   return(teamFull[c(ID), ])
 }
 
-ALTSearch(c(1,2), teamData)
+ALTSearch(1, teamData)
 ```
 

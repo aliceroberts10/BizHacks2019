@@ -21,34 +21,113 @@ Job<- c("Senior Optimization Analyst","Applied Data Scientist", "Financial Analy
 YearsofExperience<- c(15,6,12,3,10)
 OfficeLocation<- c("Vancouver","Vancouver","Vancouver","Vancouver","Vancouver")
 Age<- c(35,28,35,24,30)
-DateofHire <- c(2/31/2004, 3/01/2013, 2/05/2007, 05/10/2016, 09/30/2009)
 Department <- c("Data + Analytics","Data + Analytics", "Finance + Accounting", "Software Development","Software Development")
 
 ##Performance out of 10 
 PerformanceScore <-c(9,10,7,8,10 )
 Salary <- c(150000,120000,100000,90000,110000)
 
-TeamData <- data.frame(FullName,EmployeeNumber, Job, YearsofExperience, OfficeLocation,Age,DateofHire,Department,PerformanceScore,Salary)
+# Socre between: 0 1 or 2  where 0 means no, 1 means yes, 2 means wants to learn
+
+agile.methodology <- c(1,1,2,1,1)
+public.speaking <- c(1,2,0,0,1)
+python <-c(2,1,0,1,1)
+R <-c(1,1,1,2,0)
+Excel <-c(1,1,1,2,0)
+Cplusplus <-c(2,0,0,1,1)
+Java <- c(0,0,2,1,1)
+
+TeamData <- data.frame(FirstName,LastName,EmployeeNumber, Department,Job,OfficeLocation, YearsofExperience,Age,PerformanceScore,Salary,agile.methodology,public.speaking,python,R,Excel,Cplusplus,Java)
 
 head(TeamData)
+# Write CSV in R
+write.csv(TeamData, file = "TeamData.csv")
 
 
 ```
 
 
 ```{r Random Data (1000)}
-
+n=1000
 
 #Retrieving random names from a random CSV file lol 
-Records <- read.csv("~/Desktop/1000 Records.csv")
-head(Records)
+Records <- read.csv("~/Desktop/1000 Records.csv");
+
 FirstName <- Records$First.Name
-Lastname <- Records$Last.Name
+LastName <- Records$Last.Name
+EmployeeNumber <- sample(10000000, size = n, replace = FALSE)
 
-EmployeeNumber <- sample(100, size = 1000, replace = TRUE)
-View(EmployeeNumber)
+Departments <- c("Data + Analytics", "Finance + Accounting","Software Development")
+
+Department <- sample(Departments, size=n,replace=TRUE)
+
+JobData <- c( "Senior Optimization Analyst", "Applied Data Scientist", "Digital Analytics Developer, Practice Lead")
+
+JobFinance <- c("Senior Business Analyst - Controllership", "Senior Accountant, Lease & Real Estate", "Intermediate Accountant, Advertising", "Financial Analyst","Intermediate Accountant, Severance & Benefits" )
+
+JobSoftware <- c("Software Developer II - IT Integration","Senior Software Developer","Software Developer II - eCommerce","Software Developer II - IT", "Senior Software Developer - eCommerce Web")
+
+#check if the deparment is blah, then return the job
+JobFunction <- function(Department){
+
+  if(Department == "Data + Analytics")
+  {
+    Job1<- sample(JobData, size=1)
+  }
+   
+  if(Department == "Finance + Accounting")
+  {
+    Job1<- sample(JobFinance, size=1)
+  }
+  if(Department == "Software Development")
+  {
+    Job1<- sample(JobSoftware, size=1)
+  }
+   
+return(Job1)
+}
+Job =  sapply(Department,JobFunction)
+
+#For simplicity we will just use Vancouver
+OfficeLocations<- "Vancouver"
+OfficeLocation <- sample(OfficeLocations, size=n, replace=TRUE)
+
+
+Age <- sample(20:65, size=n, replace=TRUE)
+
+
+ExperienceFunction<- function(Age){
+
+ PE = Age-20
+   YearsofExperience1 <- sample(0:PE, size=1)
+     
+     return(YearsofExperience1)
+
+}
+YearsofExperience =  sapply(Age,ExperienceFunction)
 
 
 
-## randomly generating based on the variables. 
+PerformanceScore <- sample(1:10, size=n, replace =TRUE)
+Salary <- sample(seq(60000,200000,by = 10000), size=n, replace=TRUE)
+
+
+agile.methodology <- sample(0:2, size=n,replace=TRUE)
+public.speaking <- sample(0:2, size=n,replace=TRUE)
+python <- sample(0:2, size=n,replace=TRUE)
+R <- sample(0:2, size=n,replace=TRUE)
+Excel <- sample(0:2, size=n,replace=TRUE)
+Cplusplus <- sample(0:2, size=n,replace=TRUE)
+Java <- sample(0:2, size=n,replace=TRUE)
+
+
+RandomData <- data.frame(FirstName,LastName,EmployeeNumber, Department,Job,OfficeLocation, YearsofExperience,Age,PerformanceScore,Salary,agile.methodology,public.speaking,python,R,Excel,Cplusplus,Java)
+
+
+head(RandomData)
+# Write CSV in R
+write.csv(RandomData, file = "RandomData.csv")
+
 ```
+
+

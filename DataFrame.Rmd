@@ -51,7 +51,7 @@ write.csv(TeamData, file = "TeamData.csv")
 n=1000
 
 #Retrieving random names from a random CSV file lol 
-Records <- read.csv("1000 Records.csv");
+Records <- read.csv("~/Desktop/1000 Records.csv");
 
 FirstName <- Records$First.Name
 LastName <- Records$Last.Name
@@ -134,7 +134,7 @@ write.csv(RandomData, file = "RandomData.csv")
 
 ```{r Creating Function}
 #Getting rid of not important stuff 
-RandomData[,c("PerformanceScore","YearsofExperience")] <- NULL
+
 head(RandomData)
 
 ## hardcoding number of skills we have 
@@ -146,10 +146,12 @@ maxnumskills <- 7
 
 MatchFunction <- function(Person,Data)
 {
+  
   OptMatches<- NA
-## Seeing if this person has a skill that they want
+    ## Seeing if this person has a skill that they want
     if (any(Person ==2))
     {
+      RandomData[,c("PerformanceScore","YearsofExperience")] <- NULL
       ## finding the col number(s) of the skills wanted
       colnum<- which(Person == 2)
 
@@ -175,8 +177,10 @@ MatchFunction <- function(Person,Data)
   
       OptMatches<-Data[with(Data,order(-count)), ]
   
-      }
+    }
   
+  
+
   return(OptMatches) 
 
 }
@@ -188,6 +192,7 @@ MatchFunction <- function(Person,Data)
 ```{r Implementing Function}
 head(RandomData)
 Person <- RandomData[2,]
+Person
 Result<-MatchFunction(Person,RandomData)
 Result
 ```
@@ -195,6 +200,18 @@ Result
 TeamData[,c("PerformanceScore","YearsofExperience")] <- NULL
 head(TeamData)
 Person <- TeamData[6,]
+Result<-MatchFunction(Person,TeamData)
+
+
+```
+
+```{r}
+#Testing Zhi Yuh's code 
+Person <- TeamData[6,]
+Person$R <- 0
+Person$Excel <- 0
+head(Person)
+
 Result<-MatchFunction(Person,TeamData)
 
 ```
